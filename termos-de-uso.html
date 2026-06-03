@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termos de Uso — Keren.</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --military: #4B5320;
+    --black: #0A0A0A;
+    --white: #F5F5F0;
+    --gray: #8A8A8A;
+    --gray-light: #D9D9D6;
+    --gray-dark: #1A1A1A;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--red); border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(200,16,46,0.4); border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 24px 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,10,10,0.96);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900; font-size: 20px; letter-spacing: -0.5px;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-back {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gray); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.3s;
+  }
+  .nav-back:hover { color: var(--white); }
+  .nav-back::before { content: '←'; font-size: 14px; transition: transform 0.3s; }
+  .nav-back:hover::before { transform: translateX(-4px); }
+
+  .scroll-progress { position: fixed; top: 73px; left: 0; right: 0; height: 2px; z-index: 99; }
+  .scroll-bar { height: 100%; background: var(--military); width: 0%; transition: width 0.1s ease; }
+
+  .doc-hero {
+    padding: 140px 64px 80px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative; overflow: hidden;
+  }
+  .doc-hero::before {
+    content: 'TERMOS';
+    position: absolute; right: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Poppins', sans-serif;
+    font-size: 180px; font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(75,83,32,0.09);
+    pointer-events: none; white-space: nowrap;
+  }
+  .doc-hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--military); margin-bottom: 28px;
+  }
+  .doc-hero-tag::before {
+    content: ''; display: block; width: 36px; height: 1px; background: var(--military);
+  }
+  .doc-hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 900; line-height: 0.95; letter-spacing: -3px;
+    margin-bottom: 28px;
+  }
+  .doc-hero h1 em { font-style: italic; font-weight: 300; color: var(--gray); }
+  .doc-hero-meta {
+    display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  .meta-item {
+    font-size: 12px; color: var(--gray); letter-spacing: 1px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .meta-item::before {
+    content: ''; display: block; width: 4px; height: 4px;
+    background: var(--military); border-radius: 50%;
+  }
+  .meta-item strong { color: var(--white); font-weight: 600; }
+
+  .doc-layout {
+    display: grid; grid-template-columns: 280px 1fr;
+    min-height: 100vh; align-items: start;
+  }
+
+  .doc-sidebar {
+    position: sticky; top: 73px;
+    padding: 64px 0 64px 64px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    height: calc(100vh - 73px);
+    overflow-y: auto; scrollbar-width: none;
+  }
+  .doc-sidebar::-webkit-scrollbar { display: none; }
+  .sidebar-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--military); margin-bottom: 24px;
+  }
+  .sidebar-nav { list-style: none; }
+  .sidebar-nav li { margin-bottom: 4px; }
+  .sidebar-nav a {
+    font-size: 13px; color: var(--gray);
+    text-decoration: none; letter-spacing: 0.3px;
+    padding: 8px 0 8px 16px; display: block;
+    border-left: 2px solid transparent;
+    transition: all 0.25s ease; line-height: 1.4;
+  }
+  .sidebar-nav a:hover, .sidebar-nav a.active {
+    color: var(--white); border-left-color: var(--military);
+  }
+  .sidebar-footer {
+    margin-top: 48px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .sidebar-footer p { font-size: 11px; color: var(--gray); line-height: 1.7; }
+  .sidebar-footer a { color: var(--military); text-decoration: none; }
+
+  .doc-content { padding: 64px 80px 120px; max-width: 820px; }
+
+  .doc-section {
+    margin-bottom: 72px; padding-bottom: 72px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .doc-section:last-of-type { border-bottom: none; }
+
+  .section-number {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--military); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-number::after {
+    content: ''; flex: none; width: 24px; height: 1px; background: var(--military);
+  }
+  .doc-section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px; font-weight: 700;
+    letter-spacing: -0.5px; margin-bottom: 24px; color: var(--white);
+  }
+  .doc-section p {
+    font-size: 15px; color: rgba(245,245,240,0.7);
+    line-height: 1.85; margin-bottom: 16px;
+  }
+  .doc-section p:last-child { margin-bottom: 0; }
+  .doc-section strong { color: var(--white); font-weight: 600; }
+
+  .doc-list {
+    list-style: none; margin: 20px 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .doc-list li {
+    font-size: 14px; color: rgba(245,245,240,0.7);
+    line-height: 1.7; padding-left: 20px; position: relative;
+  }
+  .doc-list li::before {
+    content: '';
+    position: absolute; left: 0; top: 10px;
+    width: 6px; height: 1px; background: var(--military);
+  }
+  .doc-list li strong { color: var(--white); }
+
+  .highlight-box {
+    background: rgba(75,83,32,0.1);
+    border-left: 3px solid var(--military);
+    padding: 24px 28px; margin: 28px 0;
+  }
+  .highlight-box p {
+    font-size: 14px; color: rgba(245,245,240,0.8); margin: 0; line-height: 1.7;
+  }
+  .highlight-box strong { color: var(--white); }
+
+  .alert-box {
+    background: rgba(200,16,46,0.08);
+    border-left: 3px solid var(--red);
+    padding: 24px 28px; margin: 28px 0;
+  }
+  .alert-box p {
+    font-size: 14px; color: rgba(245,245,240,0.8); margin: 0; line-height: 1.7;
+  }
+  .alert-box strong { color: var(--white); }
+
+  .contact-final {
+    background: var(--gray-dark); padding: 48px; margin-top: 48px;
+  }
+  .contact-final h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.3px;
+  }
+  .contact-final p { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 14px; color: var(--white); text-decoration: none; transition: color 0.3s;
+  }
+  .contact-link:hover { color: var(--red); }
+  .contact-link-icon {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0; transition: border-color 0.3s;
+  }
+  .contact-link:hover .contact-link-icon { border-color: var(--red); }
+
+  .doc-footer {
+    background: var(--gray-dark); padding: 40px 64px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 16px; color: var(--white); }
+  .footer-logo span { color: var(--red); }
+  .footer-copy { font-size: 12px; color: var(--gray); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: var(--gray); text-decoration: none; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--white); }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .doc-hero { padding: 110px 24px 60px; }
+    .doc-layout { grid-template-columns: 1fr; }
+    .doc-sidebar { display: none; }
+    .doc-content { padding: 40px 24px 80px; }
+    .doc-footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<div class="scroll-progress"><div class="scroll-bar" id="scroll-bar"></div></div>
+
+<nav>
+  <a href="https://kerenoliveira.github.io/Keren./" class="nav-logo">Keren<span>.</span></a>
+  <a href="https://kerenoliveira.github.io/Keren./" class="nav-back">Voltar ao site</a>
+</nav>
+
+<div class="doc-hero">
+  <div class="doc-hero-tag">Documento Legal</div>
+  <h1>Termos<br><em>de Uso</em></h1>
+  <div class="doc-hero-meta">
+    <div class="meta-item"><strong>Versão:</strong> 1.0</div>
+    <div class="meta-item"><strong>Última atualização:</strong> Junho de 2026</div>
+    <div class="meta-item"><strong>Responsável:</strong> Keren Layane de Oliveira Silva</div>
+    <div class="meta-item"><strong>Aplicação:</strong> kerenoliveira.github.io/Keren./</div>
+  </div>
+</div>
+
+<div class="doc-layout">
+  <aside class="doc-sidebar">
+    <div class="sidebar-label">Nesta página</div>
+    <ul class="sidebar-nav">
+      <li><a href="#aceitacao" class="active">01 — Aceitação</a></li>
+      <li><a href="#sobre-o-site">02 — Sobre o site</a></li>
+      <li><a href="#uso-permitido">03 — Uso permitido</a></li>
+      <li><a href="#propriedade">04 — Propriedade intelectual</a></li>
+      <li><a href="#servicos">05 — Contratação de serviços</a></li>
+      <li><a href="#responsabilidades">06 — Responsabilidades</a></li>
+      <li><a href="#links">07 — Links externos</a></li>
+      <li><a href="#disponibilidade">08 — Disponibilidade</a></li>
+      <li><a href="#legislacao">09 — Legislação aplicável</a></li>
+      <li><a href="#alteracoes">10 — Alterações</a></li>
+      <li><a href="#contato">11 — Contato</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <p>Dúvidas sobre estes termos?<br>
+      <a href="mailto:akeren.estrategia@gmail.com">keren.estrategia@gmail.com</a></p>
+    </div>
+  </aside>
+
+  <main class="doc-content">
+
+    <section class="doc-section reveal" id="aceitacao">
+      <div class="section-number">01</div>
+      <h2>Aceitação dos Termos</h2>
+      <p>Ao acessar e utilizar este site, você declara que leu, compreendeu e concorda com os presentes Termos de Uso em sua totalidade.</p>
+      <p>Caso não concorde com algum dos termos aqui descritos, solicitamos que interrompa o uso do site imediatamente. O acesso continuado implica aceitação integral destas condições.</p>
+      <div class="highlight-box">
+        <p><strong>Este site é operado por Keren Layane de Oliveira Silva</strong>, profissional autônoma de estratégia, design e criação digital, com sede em Rio Verde — GO. Os Termos de Uso se aplicam a todas as páginas e funcionalidades disponíveis neste domínio.</p>
+      </div>
+    </section>
+
+    <section class="doc-section reveal" id="sobre-o-site">
+      <div class="section-number">02</div>
+      <h2>Sobre o site</h2>
+      <p>Este site tem como finalidade apresentar os serviços profissionais da <strong>Keren.</strong> — estratégia de negócios, identidade visual e desenvolvimento de sites — e possibilitar o contato de potenciais clientes.</p>
+      <p>As informações disponíveis neste site têm caráter exclusivamente informativo e não constituem, por si só, um contrato de prestação de serviços. A contratação efetiva de qualquer serviço está sujeita à elaboração de proposta comercial, assinatura de contrato e pagamento de entrada conforme acordado entre as partes.</p>
+    </section>
+
+    <section class="doc-section reveal" id="uso-permitido">
+      <div class="section-number">03</div>
+      <h2>Uso permitido</h2>
+      <p>O acesso a este site é permitido a qualquer pessoa, para fins legítimos de consulta e contato profissional. Ao utilizá-lo, você se compromete a:</p>
+      <ul class="doc-list">
+        <li>Fornecer informações verdadeiras, completas e atualizadas no formulário de contato</li>
+        <li>Utilizar o site apenas para os fins a que ele se destina — consulta de serviços e estabelecimento de contato profissional</li>
+        <li>Não tentar acessar áreas restritas, sistemas internos ou dados de terceiros</li>
+        <li>Não utilizar ferramentas automatizadas (bots, scrapers) para coletar dados do site</li>
+        <li>Não reproduzir, copiar ou distribuir o conteúdo deste site sem autorização prévia e expressa</li>
+      </ul>
+      <div class="alert-box">
+        <p>Qualquer uso que viole estes termos, a legislação brasileira vigente ou os direitos de terceiros poderá resultar em responsabilização civil e/ou criminal.</p>
+      </div>
+    </section>
+
+    <section class="doc-section reveal" id="propriedade">
+      <div class="section-number">04</div>
+      <h2>Propriedade intelectual</h2>
+      <p>Todo o conteúdo disponível neste site é de propriedade exclusiva de <strong>Keren Layane de Oliveira Silva</strong> ou foi utilizado com as devidas autorizações, incluindo:</p>
+      <ul class="doc-list">
+        <li><strong>Textos e conteúdo editorial</strong> — todos os textos, descrições e copies produzidos para este site</li>
+        <li><strong>Identidade visual</strong> — logotipo, paleta de cores, tipografia, elementos gráficos e o Manual de Marca da Keren.</li>
+        <li><strong>Código-fonte</strong> — a estrutura HTML, CSS e JavaScript desenvolvida para este site</li>
+        <li><strong>Portfólio exibido</strong> — os projetos listados são apresentados com autorização dos respectivos clientes</li>
+      </ul>
+      <p>É <strong>proibida</strong> a reprodução, distribuição, modificação ou uso comercial de qualquer elemento deste site sem autorização prévia e por escrito. Referências e citações são permitidas desde que acompanhadas de crédito e link para este site.</p>
+      <div class="highlight-box">
+        <p>Interessado em contratar os serviços de criação de sites ou identidade visual? <strong>Entre em contato</strong> — cada projeto é desenvolvido de forma exclusiva para o cliente.</p>
+      </div>
+    </section>
+
+    <section class="doc-section reveal" id="servicos">
+      <div class="section-number">05</div>
+      <h2>Contratação de serviços</h2>
+      <p>As informações sobre serviços e valores apresentadas neste site são de caráter orientativo. A proposta definitiva é elaborada após análise do briefing e reunião de descoberta.</p>
+      <p>O processo de contratação segue as seguintes etapas:</p>
+      <ul class="doc-list">
+        <li><strong>Contato inicial</strong> — via formulário, e-mail ou WhatsApp, com descrição do projeto</li>
+        <li><strong>Briefing</strong> — preenchimento do formulário de descoberta (DOC-01) enviado pela Keren.</li>
+        <li><strong>Proposta comercial</strong> — elaborada em até 48h após o briefing, com escopo, prazo e valores</li>
+        <li><strong>Contrato</strong> — assinatura do contrato de prestação de serviços (DOC-03) por ambas as partes</li>
+        <li><strong>Início do projeto</strong> — condicionado ao pagamento da entrada acordada</li>
+      </ul>
+      <p>O envio de mensagem pelo formulário ou qualquer outro canal <strong>não constitui contrato</strong> nem garante disponibilidade de agenda. A confirmação do projeto ocorre apenas após assinatura do contrato e recebimento da entrada.</p>
+    </section>
+
+    <section class="doc-section reveal" id="responsabilidades">
+      <div class="section-number">06</div>
+      <h2>Responsabilidades e limitações</h2>
+      <p>A <strong>Keren.</strong> emprega seus melhores esforços para manter as informações deste site precisas, completas e atualizadas. No entanto, não há garantia de que o conteúdo esteja isento de erros ou que seja adequado para todos os propósitos.</p>
+      <p>Não nos responsabilizamos por:</p>
+      <ul class="doc-list">
+        <li>Danos diretos ou indiretos decorrentes do uso ou impossibilidade de uso deste site</li>
+        <li>Interrupções temporárias de acesso por manutenção, falhas técnicas ou instabilidade de servidores</li>
+        <li>Decisões tomadas com base exclusivamente nas informações disponíveis neste site, sem contratação formal</li>
+        <li>Conteúdo de sites externos acessados por links presentes neste site</li>
+      </ul>
+    </section>
+
+    <section class="doc-section reveal" id="links">
+      <div class="section-number">07</div>
+      <h2>Links externos</h2>
+      <p>Este site pode conter links para sites de terceiros — como perfis em redes sociais, projetos do portfólio ou plataformas de comunicação. Esses links são fornecidos apenas por conveniência.</p>
+      <p>A <strong>Keren.</strong> não tem controle sobre o conteúdo, políticas de privacidade ou práticas de sites externos e não se responsabiliza por eles. O acesso a esses links é de inteira responsabilidade do usuário.</p>
+    </section>
+
+    <section class="doc-section reveal" id="disponibilidade">
+      <div class="section-number">08</div>
+      <h2>Disponibilidade do site</h2>
+      <p>Este site é hospedado no <strong>GitHub Pages</strong> e está sujeito às condições de disponibilidade e manutenção dessa plataforma. Nos esforçamos para mantê-lo acessível de forma contínua, mas não garantimos disponibilidade ininterrupta.</p>
+      <p>Reservamo-nos o direito de modificar, suspender temporariamente ou encerrar o site a qualquer momento, sem aviso prévio, para fins de manutenção, atualização ou por qualquer outro motivo.</p>
+    </section>
+
+    <section class="doc-section reveal" id="legislacao">
+      <div class="section-number">09</div>
+      <h2>Legislação aplicável</h2>
+      <p>Estes Termos de Uso são regidos e interpretados de acordo com as leis da <strong>República Federativa do Brasil</strong>, em especial:</p>
+      <ul class="doc-list">
+        <li><strong>Lei nº 13.709/2018 (LGPD)</strong> — Lei Geral de Proteção de Dados Pessoais</li>
+        <li><strong>Lei nº 12.965/2014 (Marco Civil da Internet)</strong> — princípios, garantias e deveres para o uso da internet no Brasil</li>
+        <li><strong>Código Civil Brasileiro</strong> — no que se refere às obrigações e contratos</li>
+        <li><strong>Código de Defesa do Consumidor (Lei nº 8.078/1990)</strong> — quando aplicável à relação de consumo</li>
+      </ul>
+      <p>Para dirimir quaisquer dúvidas ou conflitos decorrentes destes Termos, as partes elegem o <strong>Foro da Comarca de Rio Verde — GO</strong>, com renúncia a qualquer outro, por mais privilegiado que seja.</p>
+    </section>
+
+    <section class="doc-section reveal" id="alteracoes">
+      <div class="section-number">10</div>
+      <h2>Alterações dos Termos</h2>
+      <p>Estes Termos de Uso podem ser revisados e atualizados a qualquer momento. A versão mais recente estará sempre disponível nesta página, com a data de atualização indicada no topo do documento.</p>
+      <p>O uso continuado do site após a publicação de alterações implica a aceitação automática das novas condições. Recomendamos a leitura periódica deste documento.</p>
+    </section>
+
+    <section class="doc-section reveal" id="contato">
+      <div class="section-number">11</div>
+      <h2>Contato</h2>
+      <p>Para dúvidas, solicitações ou esclarecimentos sobre estes Termos de Uso, entre em contato diretamente:</p>
+      <div class="contact-final">
+        <h3>Keren Layane de Oliveira Silva</h3>
+        <p>Rio Verde — GO, Brasil</p>
+        <div class="contact-links">
+          <a href="mailto:keren.estrategia@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            keren.estrategia@gmail.com
+          </a>
+          <a href="https://wa.me/5564993296241" class="contact-link" target="_blank" rel="noopener">
+            <div class="contact-link-icon">✆</div>
+            (64) 99329-6241
+          </a>
+          <a href="https://kerenoliveira.github.io/Keren./" class="contact-link">
+            <div class="contact-link-icon">◎</div>
+            kerenoliveira.github.io/Keren./
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="doc-footer">
+  <div class="footer-logo">Keren<span>.</span></div>
+  <div class="footer-copy">© 2026 Keren Layane de Oliveira Silva · Todos os direitos reservados</div>
+  <div class="footer-links">
+    <a href="https://kerenoliveira.github.io/Keren./">Site</a>
+    <a href="keren-politica-de-privacidade.html">Privacidade</a>
+    <a href="mailto:keren.estrategia@gmail.com">Contato</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  const bar = document.getElementById('scroll-bar');
+  window.addEventListener('scroll', () => {
+    bar.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
+
+  const sections = document.querySelectorAll('.doc-section');
+  const sideLinks = document.querySelectorAll('.sidebar-nav a');
+  const sideObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        sideLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => sideObs.observe(s));
+</script>
+</body>
+</html>
