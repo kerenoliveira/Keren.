@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página não encontrada — Keren.</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --military: #4B5320;
+    --black: #0A0A0A;
+    --white: #F5F5F0;
+    --gray: #8A8A8A;
+    --gray-light: #D9D9D6;
+    --gray-dark: #1A1A1A;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { height: 100%; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    min-height: 100vh;
+    overflow: hidden;
+    cursor: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--red); border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(200,16,46,0.4); border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+  .cursor-ring.hovered { transform: translate(-50%, -50%) scale(2); border-color: var(--red); }
+
+  /* NAV */
+  nav {
+    padding: 28px 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    position: relative; z-index: 10;
+  }
+  .nav-logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900; font-size: 20px; letter-spacing: -0.5px;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-status {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gray); display: flex; align-items: center; gap: 8px;
+  }
+  .nav-status::before {
+    content: ''; display: block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--red);
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  /* MAIN */
+  .main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* LADO ESQUERDO */
+  .left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 72px 80px 64px;
+    position: relative; z-index: 2;
+  }
+
+  .error-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 32px;
+    opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+  .error-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--red); }
+
+  .error-code {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(100px, 14vw, 160px);
+    font-weight: 900; line-height: 0.85;
+    letter-spacing: -8px; color: var(--white);
+    opacity: 0; animation: fadeUp 0.6s ease 0.35s forwards;
+  }
+  .error-code .dot { color: var(--red); letter-spacing: 0; }
+
+  .error-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 300; font-style: italic;
+    color: var(--gray); letter-spacing: -0.5px;
+    margin-top: 16px; margin-bottom: 32px;
+    opacity: 0; animation: fadeUp 0.6s ease 0.5s forwards;
+  }
+
+  .error-desc {
+    font-size: 15px; color: rgba(245,245,240,0.55);
+    line-height: 1.8; max-width: 400px; margin-bottom: 52px;
+    opacity: 0; animation: fadeUp 0.6s ease 0.65s forwards;
+  }
+
+  .error-actions {
+    display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.6s ease 0.8s forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--white); background: var(--red);
+    padding: 15px 36px; text-decoration: none;
+    display: inline-block; transition: all 0.3s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-primary:hover { background: #a50d26; transform: translateY(-2px); }
+
+  .btn-ghost {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gray); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: color 0.3s;
+  }
+  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost::after { content: '↓'; font-size: 14px; }
+
+  /* QUICK LINKS */
+  .quick-links {
+    margin-top: 64px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    opacity: 0; animation: fadeUp 0.6s ease 1s forwards;
+  }
+  .ql-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 20px;
+  }
+  .ql-grid { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ql-link {
+    font-size: 12px; font-weight: 500; letter-spacing: 1px;
+    color: rgba(245,245,240,0.5);
+    text-decoration: none; padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.25s;
+  }
+  .ql-link:hover {
+    color: var(--white);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* LADO DIREITO */
+  .right {
+    position: relative; overflow: hidden;
+    border-left: 1px solid rgba(255,255,255,0.04);
+  }
+
+  /* Grade de fundo animada */
+  .grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    animation: gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(48px); }
+  }
+
+  /* Números flutuantes */
+  .float-nums {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .num-big {
+    font-family: 'Poppins', sans-serif;
+    font-size: 340px; font-weight: 900;
+    letter-spacing: -20px; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(200,16,46,0.1);
+    user-select: none; pointer-events: none;
+    animation: floatSlow 8s ease-in-out infinite;
+  }
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-20px) rotate(-1deg); }
+  }
+
+  /* Linha vertical decorativa */
+  .v-line {
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(200,16,46,0.15), transparent);
+  }
+
+  /* Detalhe no canto */
+  .corner-detail {
+    position: absolute; bottom: 48px; right: 48px;
+    text-align: right;
+    opacity: 0; animation: fadeUp 0.6s ease 1.2s forwards;
+  }
+  .corner-detail .cd-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gray); font-weight: 600; margin-bottom: 8px;
+  }
+  .corner-detail .cd-url {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px; color: rgba(255,255,255,0.3);
+    font-weight: 300; letter-spacing: 0.5px;
+  }
+
+  /* Partículas de erro */
+  .particles {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--red);
+    opacity: 0;
+    animation: particleFade var(--dur, 4s) ease-in-out var(--delay, 0s) infinite;
+  }
+  @keyframes particleFade {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.1; }
+    100% { opacity: 0; transform: translateY(-80px) scale(0.3); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 20px 64px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; z-index: 10;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-logo { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 14px; color: var(--white); }
+  .footer-logo span { color: var(--red); }
+  .footer-copy { font-size: 11px; color: rgba(138,138,138,0.5); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 11px; color: rgba(138,138,138,0.5); text-decoration: none; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--gray); }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .main { grid-template-columns: 1fr; }
+    .right { display: none; }
+    .left { padding: 60px 24px; }
+    footer { padding: 20px 24px; flex-direction: column; text-align: center; gap: 8px; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://kerenoliveira.github.io/Keren./" class="nav-logo">Keren<span>.</span></a>
+  <div class="nav-status">Erro 404</div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ESQUERDO -->
+  <div class="left">
+    <div class="error-tag">Página não encontrada</div>
+    <div class="error-code">40<span class="dot">4</span></div>
+    <div class="error-title">Esse caminho não existe.</div>
+    <p class="error-desc">
+      A página que você procura foi removida, teve seu endereço alterado ou nunca existiu por aqui. Mas o resto do site está funcionando perfeitamente.
+    </p>
+    <div class="error-actions">
+      <a href="https://kerenoliveira.github.io/Keren./" class="btn-primary">Ir para o início</a>
+      <a href="https://kerenoliveira.github.io/Keren./#contato" class="btn-ghost">Fale comigo</a>
+    </div>
+
+    <div class="quick-links">
+      <div class="ql-label">Ou vá direto para</div>
+      <div class="ql-grid">
+        <a href="https://kerenoliveira.github.io/Keren./#sobre" class="ql-link">Sobre</a>
+        <a href="https://kerenoliveira.github.io/Keren./#servicos" class="ql-link">Serviços</a>
+        <a href="https://kerenoliveira.github.io/Keren./#projetos" class="ql-link">Projetos</a>
+        <a href="https://kerenoliveira.github.io/Keren./#contato" class="ql-link">Contato</a>
+        <a href="https://wa.me/5564993296241" class="ql-link" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIREITO -->
+  <div class="right">
+    <div class="grid-bg"></div>
+    <div class="v-line"></div>
+    <div class="float-nums">
+      <div class="num-big">404</div>
+    </div>
+    <div class="particles" id="particles"></div>
+    <div class="corner-detail">
+      <div class="cd-label">Você estava em</div>
+      <div class="cd-url" id="current-path">—</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Keren<span>.</span></div>
+  <div class="footer-copy">© 2026 Keren Layane de Oliveira Silva</div>
+  <div class="footer-links">
+    <a href="https://kerenoliveira.github.io/Keren./">Início</a>
+    <a href="keren-politica-de-privacidade.html">Privacidade</a>
+    <a href="keren-termos-de-uso.html">Termos</a>
+  </div>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+  });
+
+  // Mostra a URL atual
+  const pathEl = document.getElementById('current-path');
+  if (pathEl) pathEl.textContent = window.location.pathname || '/página-inexistente';
+
+  // Partículas
+  const container = document.getElementById('particles');
+  const positions = [
+    [15,20],[25,70],[40,35],[55,85],[70,15],[80,55],[90,30],[60,65],[35,90],[10,50],
+    [75,75],[50,10],[20,45],[85,40],[45,60],[65,25],[30,80],[88,65],[12,75],[70,48]
+  ];
+  positions.forEach(([x, y], i) => {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `left:${x}%;top:${y}%;--dur:${3 + Math.random() * 4}s;--delay:${Math.random() * 5}s`;
+    container.appendChild(p);
+  });
+
+  // Contador regressivo opcional (redireciona após 60s)
+  // Descomente se quiser redirecionamento automático:
+  // let t = 60;
+  // setInterval(() => { if(--t <= 0) window.location.href = '/'; }, 1000);
+</script>
+</body>
+</html>
