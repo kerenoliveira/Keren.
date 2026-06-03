@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade — Keren.</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --military: #4B5320;
+    --black: #0A0A0A;
+    --white: #F5F5F0;
+    --gray: #8A8A8A;
+    --gray-light: #D9D9D6;
+    --gray-dark: #1A1A1A;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    transition: transform 0.1s ease;
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(200,16,46,0.4);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,10,10,0.96);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900; font-size: 20px;
+    letter-spacing: -0.5px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-back {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: color 0.3s;
+  }
+  .nav-back:hover { color: var(--white); }
+  .nav-back::before { content: '←'; font-size: 14px; transition: transform 0.3s; }
+  .nav-back:hover::before { transform: translateX(-4px); }
+
+  /* HERO DO DOC */
+  .doc-hero {
+    padding: 140px 64px 80px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-hero::before {
+    content: 'PRIVACIDADE';
+    position: absolute; right: -20px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Poppins', sans-serif;
+    font-size: 160px; font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(200,16,46,0.07);
+    pointer-events: none; white-space: nowrap;
+  }
+  .doc-hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 28px;
+  }
+  .doc-hero-tag::before {
+    content: ''; display: block; width: 36px; height: 1px; background: var(--red);
+  }
+  .doc-hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 900; line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 28px;
+  }
+  .doc-hero h1 em {
+    font-style: italic; font-weight: 300; color: var(--gray);
+  }
+  .doc-hero-meta {
+    display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  .meta-item {
+    font-size: 12px; color: var(--gray); letter-spacing: 1px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .meta-item::before {
+    content: ''; display: block; width: 4px; height: 4px;
+    background: var(--red); border-radius: 50%;
+  }
+  .meta-item strong { color: var(--white); font-weight: 600; }
+
+  /* LAYOUT PRINCIPAL */
+  .doc-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    align-items: start;
+  }
+
+  /* SIDEBAR / SUMÁRIO */
+  .doc-sidebar {
+    position: sticky; top: 73px;
+    padding: 64px 0 64px 64px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    height: calc(100vh - 73px);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .doc-sidebar::-webkit-scrollbar { display: none; }
+  .sidebar-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 24px;
+  }
+  .sidebar-nav { list-style: none; }
+  .sidebar-nav li { margin-bottom: 4px; }
+  .sidebar-nav a {
+    font-size: 13px; color: var(--gray);
+    text-decoration: none; letter-spacing: 0.3px;
+    padding: 8px 0; display: block;
+    border-left: 2px solid transparent;
+    padding-left: 16px;
+    transition: all 0.25s ease;
+    line-height: 1.4;
+  }
+  .sidebar-nav a:hover,
+  .sidebar-nav a.active {
+    color: var(--white);
+    border-left-color: var(--red);
+  }
+  .sidebar-footer {
+    margin-top: 48px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .sidebar-footer p {
+    font-size: 11px; color: var(--gray); line-height: 1.7;
+  }
+  .sidebar-footer a {
+    color: var(--red); text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .sidebar-footer a:hover { opacity: 0.8; }
+
+  /* CONTEÚDO */
+  .doc-content {
+    padding: 64px 80px 120px;
+    max-width: 820px;
+  }
+
+  /* SEÇÕES */
+  .doc-section {
+    margin-bottom: 72px;
+    padding-bottom: 72px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .doc-section:last-of-type {
+    border-bottom: none;
+  }
+  .section-number {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-number::after {
+    content: ''; flex: none;
+    width: 24px; height: 1px; background: var(--red);
+  }
+  .doc-section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px; font-weight: 700;
+    letter-spacing: -0.5px; margin-bottom: 24px;
+    color: var(--white);
+  }
+  .doc-section p {
+    font-size: 15px; color: rgba(245,245,240,0.7);
+    line-height: 1.85; margin-bottom: 16px;
+  }
+  .doc-section p:last-child { margin-bottom: 0; }
+  .doc-section strong { color: var(--white); font-weight: 600; }
+
+  /* LISTAS */
+  .doc-list {
+    list-style: none;
+    margin: 20px 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .doc-list li {
+    font-size: 14px; color: rgba(245,245,240,0.7);
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+  }
+  .doc-list li::before {
+    content: '';
+    position: absolute; left: 0; top: 10px;
+    width: 6px; height: 1px; background: var(--red);
+  }
+  .doc-list li strong { color: var(--white); }
+
+  /* BLOCO DE DESTAQUE */
+  .highlight-box {
+    background: rgba(200,16,46,0.08);
+    border-left: 3px solid var(--red);
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+  .highlight-box p {
+    font-size: 14px; color: rgba(245,245,240,0.8);
+    margin: 0; line-height: 1.7;
+  }
+  .highlight-box strong { color: var(--white); }
+
+  .info-box {
+    background: rgba(75,83,32,0.12);
+    border-left: 3px solid var(--military);
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+  .info-box p {
+    font-size: 14px; color: rgba(245,245,240,0.75);
+    margin: 0; line-height: 1.7;
+  }
+
+  /* TABELA DE COOKIES */
+  .cookies-table {
+    width: 100%; border-collapse: collapse;
+    margin: 24px 0; font-size: 13px;
+  }
+  .cookies-table th {
+    text-align: left; padding: 12px 16px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gray); font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .cookies-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: rgba(245,245,240,0.65);
+    vertical-align: top; line-height: 1.5;
+  }
+  .cookies-table tr:last-child td { border-bottom: none; }
+  .cookies-table td:first-child { color: var(--white); font-weight: 500; }
+  .badge {
+    display: inline-block; padding: 2px 8px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    border: 1px solid;
+  }
+  .badge-essential { color: var(--red); border-color: rgba(200,16,46,0.4); }
+  .badge-analytics { color: #6B7340; border-color: rgba(75,83,32,0.4); }
+
+  /* CONTATO FINAL */
+  .contact-final {
+    background: var(--gray-dark);
+    padding: 48px;
+    margin-top: 48px;
+  }
+  .contact-final h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 16px; letter-spacing: -0.3px;
+  }
+  .contact-final p {
+    font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 14px; color: var(--white);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .contact-link:hover { color: var(--red); }
+  .contact-link-icon {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; flex-shrink: 0;
+    transition: border-color 0.3s;
+  }
+  .contact-link:hover .contact-link-icon { border-color: var(--red); }
+
+  /* FOOTER */
+  .doc-footer {
+    background: var(--gray-dark);
+    padding: 40px 64px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900; font-size: 16px;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-copy { font-size: 12px; color: var(--gray); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a {
+    font-size: 12px; color: var(--gray);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--white); }
+
+  /* SCROLL PROGRESS */
+  .scroll-progress {
+    position: fixed; top: 73px; left: 0; right: 0;
+    height: 2px; background: transparent; z-index: 99;
+  }
+  .scroll-bar {
+    height: 100%; background: var(--red); width: 0%;
+    transition: width 0.1s ease;
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .doc-hero { padding: 110px 24px 60px; }
+    .doc-layout { grid-template-columns: 1fr; }
+    .doc-sidebar { display: none; }
+    .doc-content { padding: 40px 24px 80px; }
+    .doc-footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<div class="scroll-progress">
+  <div class="scroll-bar" id="scroll-bar"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://kerenoliveira.github.io/Keren./" class="nav-logo">Keren<span>.</span></a>
+  <a href="https://kerenoliveira.github.io/Keren./" class="nav-back">Voltar ao site</a>
+</nav>
+
+<!-- HERO -->
+<div class="doc-hero">
+  <div class="doc-hero-tag">Documento Legal</div>
+  <h1>Política de<br><em>Privacidade</em></h1>
+  <div class="doc-hero-meta">
+    <div class="meta-item"><strong>Versão:</strong> 1.0</div>
+    <div class="meta-item"><strong>Última atualização:</strong> Junho de 2026</div>
+    <div class="meta-item"><strong>Responsável:</strong> Keren Layane de Oliveira Silva</div>
+    <div class="meta-item"><strong>Lei:</strong> LGPD — Lei nº 13.709/2018</div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="doc-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="doc-sidebar">
+    <div class="sidebar-label">Nesta página</div>
+    <ul class="sidebar-nav">
+      <li><a href="#introducao" class="active">01 — Introdução</a></li>
+      <li><a href="#dados-coletados">02 — Dados coletados</a></li>
+      <li><a href="#como-usamos">03 — Como usamos</a></li>
+      <li><a href="#cookies">04 — Cookies</a></li>
+      <li><a href="#compartilhamento">05 — Compartilhamento</a></li>
+      <li><a href="#armazenamento">06 — Armazenamento</a></li>
+      <li><a href="#seus-direitos">07 — Seus direitos</a></li>
+      <li><a href="#seguranca">08 — Segurança</a></li>
+      <li><a href="#menores">09 — Menores de idade</a></li>
+      <li><a href="#alteracoes">10 — Alterações</a></li>
+      <li><a href="#contato">11 — Contato</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <p>Dúvidas sobre esta política?<br>
+      Entre em contato:<br>
+      <a href="mailto:admkerenoliveira@gmail.com">admkerenoliveira@gmail.com</a></p>
+    </div>
+  </aside>
+
+  <!-- CONTEÚDO -->
+  <main class="doc-content">
+
+    <!-- 01 INTRODUÇÃO -->
+    <section class="doc-section reveal" id="introducao">
+      <div class="section-number">01</div>
+      <h2>Introdução</h2>
+      <p>A <strong>Keren.</strong> — representada por <strong>Keren Layane de Oliveira Silva</strong>, profissional autônoma de estratégia, design e criação digital, com sede em Rio Verde – GO — tem o compromisso de proteger a privacidade de todas as pessoas que visitam este site ou entram em contato para contratar serviços.</p>
+      <p>Esta Política de Privacidade explica de forma clara e transparente quais dados pessoais são coletados, por que são coletados, como são utilizados e quais são os seus direitos como titular, em conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD — Lei nº 13.709/2018)</strong>.</p>
+      <p>Ao utilizar este site ou enviar qualquer informação de contato, você concorda com os termos descritos nesta política.</p>
+      <div class="highlight-box">
+        <p><strong>Resumo direto:</strong> Seus dados são usados apenas para que eu possa responder seu contato, elaborar propostas e executar projetos contratados. Não vendemos, não compartilhamos comercialmente e não fazemos spam.</p>
+      </div>
+    </section>
+
+    <!-- 02 DADOS COLETADOS -->
+    <section class="doc-section reveal" id="dados-coletados">
+      <div class="section-number">02</div>
+      <h2>Dados coletados</h2>
+      <p>Os dados coletados variam de acordo com a forma como você interage com este site:</p>
+
+      <strong style="display:block; margin: 20px 0 12px; font-size:14px; letter-spacing:1px; text-transform:uppercase; color: var(--gray);">Via formulário de contato</strong>
+      <ul class="doc-list">
+        <li><strong>Nome completo</strong> — para identificação e personalização do atendimento</li>
+        <li><strong>E-mail</strong> — canal principal de comunicação</li>
+        <li><strong>Nome da empresa ou negócio</strong> — para entendimento do contexto</li>
+        <li><strong>Tipo de projeto</strong> — para direcionamento da proposta</li>
+        <li><strong>Mensagem livre</strong> — descrição das necessidades do projeto</li>
+      </ul>
+
+      <strong style="display:block; margin: 28px 0 12px; font-size:14px; letter-spacing:1px; text-transform:uppercase; color: var(--gray);">Automaticamente, pela navegação</strong>
+      <ul class="doc-list">
+        <li><strong>Endereço IP</strong> — registrado automaticamente pelo servidor</li>
+        <li><strong>Tipo de dispositivo e navegador</strong> — para garantir a compatibilidade do site</li>
+        <li><strong>Páginas acessadas e tempo de navegação</strong> — por meio de ferramentas de análise</li>
+        <li><strong>Localização aproximada (cidade/estado)</strong> — com base no IP, sem precisão de endereço</li>
+      </ul>
+
+      <strong style="display:block; margin: 28px 0 12px; font-size:14px; letter-spacing:1px; text-transform:uppercase; color: var(--gray);">Em projetos contratados</strong>
+      <ul class="doc-list">
+        <li><strong>Documentos de identificação</strong> — CPF ou CNPJ, para formalização de contratos</li>
+        <li><strong>Informações do negócio</strong> — fornecidas no briefing de projeto</li>
+        <li><strong>Materiais enviados</strong> — fotos, logos, textos e outros arquivos do cliente</li>
+      </ul>
+    </section>
+
+    <!-- 03 COMO USAMOS -->
+    <section class="doc-section reveal" id="como-usamos">
+      <div class="section-number">03</div>
+      <h2>Como usamos seus dados</h2>
+      <p>Seus dados são utilizados exclusivamente para as finalidades abaixo, com base nas hipóteses legais da LGPD:</p>
+      <ul class="doc-list">
+        <li><strong>Responder ao contato inicial</strong> — retorno dentro de 48 horas úteis, conforme prometido no site</li>
+        <li><strong>Elaborar e enviar propostas comerciais</strong> — com base nas informações fornecidas no formulário</li>
+        <li><strong>Executar projetos contratados</strong> — utilizando os dados e materiais entregues durante o processo</li>
+        <li><strong>Formalização contratual</strong> — geração de contratos e notas fiscais quando aplicável</li>
+        <li><strong>Comunicação sobre o andamento do projeto</strong> — atualizações, revisões e entrega final</li>
+        <li><strong>Melhorias no site</strong> — análise de navegação para otimizar a experiência do usuário</li>
+      </ul>
+      <div class="info-box">
+        <p>Seus dados <strong>nunca são utilizados</strong> para envio de newsletters sem autorização, publicidade de terceiros ou qualquer finalidade diferente das listadas acima.</p>
+      </div>
+    </section>
+
+    <!-- 04 COOKIES -->
+    <section class="doc-section reveal" id="cookies">
+      <div class="section-number">04</div>
+      <h2>Cookies e rastreamento</h2>
+      <p>Este site pode utilizar cookies — pequenos arquivos de texto armazenados no seu navegador — para garantir o funcionamento adequado e coletar dados de navegação de forma anônima.</p>
+
+      <table class="cookies-table">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Finalidade</th>
+            <th>Duração</th>
+            <th>Categoria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Técnicos</td>
+            <td>Funcionamento básico do site</td>
+            <td>Sessão</td>
+            <td><span class="badge badge-essential">Essencial</span></td>
+          </tr>
+          <tr>
+            <td>Análise (Google Analytics)</td>
+            <td>Estatísticas de acesso e comportamento de navegação de forma anônima</td>
+            <td>Até 2 anos</td>
+            <td><span class="badge badge-analytics">Analítico</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Você pode desativar os cookies diretamente nas configurações do seu navegador. A desativação dos cookies analíticos não prejudica a utilização do site — apenas a coleta de dados de navegação é interrompida.</p>
+      <p>Este site é hospedado no <strong>GitHub Pages</strong>, que pode coletar dados técnicos de acesso de acordo com os próprios termos de uso do GitHub. Consulte a <a href="https://docs.github.com/pt/site-policy/privacy-policies/github-privacy-statement" style="color: var(--red); text-decoration: none;">política de privacidade do GitHub</a> para mais detalhes.</p>
+    </section>
+
+    <!-- 05 COMPARTILHAMENTO -->
+    <section class="doc-section reveal" id="compartilhamento">
+      <div class="section-number">05</div>
+      <h2>Compartilhamento de dados</h2>
+      <p>Seus dados pessoais <strong>não são vendidos, alugados ou cedidos</strong> a terceiros para fins comerciais.</p>
+      <p>Em casos específicos, dados podem ser compartilhados com:</p>
+      <ul class="doc-list">
+        <li><strong>Ferramentas de trabalho</strong> — como Google Workspace (Gmail), utilizadas exclusivamente para comunicação e organização interna de projetos, com proteção de dados adequada</li>
+        <li><strong>Prestadores de serviço técnico</strong> — plataformas como GitHub Pages (hospedagem do site), que possuem suas próprias políticas de privacidade</li>
+        <li><strong>Autoridades competentes</strong> — quando exigido por lei, ordem judicial ou obrigação regulatória</li>
+      </ul>
+      <div class="highlight-box">
+        <p>Nenhum dado é compartilhado com parceiros comerciais, agências de publicidade ou qualquer outra empresa para fins de marketing ou prospecção.</p>
+      </div>
+    </section>
+
+    <!-- 06 ARMAZENAMENTO -->
+    <section class="doc-section reveal" id="armazenamento">
+      <div class="section-number">06</div>
+      <h2>Armazenamento e retenção</h2>
+      <p>Seus dados são armazenados de forma segura e são mantidos pelo tempo necessário para cumprir as finalidades descritas nesta política.</p>
+      <ul class="doc-list">
+        <li><strong>Contatos sem conversão em projeto</strong> — mantidos por até 12 meses para eventual retomada de contato, depois disso são eliminados</li>
+        <li><strong>Dados de projetos realizados</strong> — mantidos por até 5 anos para fins de documentação, suporte e cumprimento de obrigações legais e fiscais</li>
+        <li><strong>Dados de navegação anônimos</strong> — mantidos por até 2 anos pelas ferramentas de análise</li>
+      </ul>
+      <p>Após os prazos indicados, os dados são eliminados de forma segura ou anonimizados, de modo que não seja mais possível identificar o titular.</p>
+    </section>
+
+    <!-- 07 SEUS DIREITOS -->
+    <section class="doc-section reveal" id="seus-direitos">
+      <div class="section-number">07</div>
+      <h2>Seus direitos como titular</h2>
+      <p>A LGPD garante a você, como titular dos dados, os seguintes direitos — que podem ser exercidos a qualquer momento mediante solicitação:</p>
+      <ul class="doc-list">
+        <li><strong>Confirmação e acesso</strong> — saber se seus dados são tratados e ter acesso a eles</li>
+        <li><strong>Correção</strong> — solicitar a atualização de dados incompletos, inexatos ou desatualizados</li>
+        <li><strong>Anonimização, bloqueio ou eliminação</strong> — de dados desnecessários ou tratados em desconformidade com a lei</li>
+        <li><strong>Portabilidade</strong> — receber seus dados em formato estruturado para uso em outro serviço</li>
+        <li><strong>Eliminação</strong> — solicitar a exclusão dos dados tratados com base em seu consentimento</li>
+        <li><strong>Revogação do consentimento</strong> — retirar a autorização para o tratamento de dados a qualquer momento</li>
+        <li><strong>Oposição</strong> — contestar o tratamento realizado em desacordo com a lei</li>
+        <li><strong>Informação</strong> — ser informado sobre as entidades públicas e privadas com as quais dados foram compartilhados</li>
+      </ul>
+      <div class="info-box">
+        <p>Para exercer qualquer um desses direitos, envie um e-mail para <strong>admkerenoliveira@gmail.com</strong> com o assunto <strong>"Direitos LGPD"</strong>. O retorno será feito em até 15 dias úteis.</p>
+      </div>
+    </section>
+
+    <!-- 08 SEGURANÇA -->
+    <section class="doc-section reveal" id="seguranca">
+      <div class="section-number">08</div>
+      <h2>Segurança dos dados</h2>
+      <p>São adotadas medidas técnicas e organizacionais para proteger seus dados contra acesso não autorizado, perda, alteração ou divulgação indevida:</p>
+      <ul class="doc-list">
+        <li>Comunicação por canais com criptografia (Gmail com TLS, WhatsApp com criptografia ponta a ponta)</li>
+        <li>Armazenamento de arquivos de projeto em plataformas com controle de acesso</li>
+        <li>Contratos e documentos assinados digitalmente ou mantidos de forma segura</li>
+        <li>Acesso restrito aos dados — apenas a responsável pelo projeto tem acesso às informações do cliente</li>
+      </ul>
+      <p>Em caso de incidente de segurança que possa causar dano relevante, os titatulares afetados serão notificados dentro do prazo legal.</p>
+    </section>
+
+    <!-- 09 MENORES -->
+    <section class="doc-section reveal" id="menores">
+      <div class="section-number">09</div>
+      <h2>Menores de idade</h2>
+      <p>Os serviços da Keren. são destinados a pessoas maiores de 18 anos ou empresas. Este site <strong>não coleta intencionalmente dados de menores de 18 anos</strong>.</p>
+      <p>Caso um responsável legal identifique que dados de um menor foram fornecidos sem autorização, solicitamos contato imediato para que tais informações sejam prontamente eliminadas.</p>
+    </section>
+
+    <!-- 10 ALTERAÇÕES -->
+    <section class="doc-section reveal" id="alteracoes">
+      <div class="section-number">10</div>
+      <h2>Alterações desta política</h2>
+      <p>Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças na legislação, nos serviços prestados ou nas práticas adotadas.</p>
+      <p>Alterações relevantes serão comunicadas com destaque no site. A data de "última atualização" no topo desta página indica quando ocorreu a revisão mais recente.</p>
+      <p>O uso continuado do site após a publicação de alterações implica a aceitação dos novos termos.</p>
+    </section>
+
+    <!-- 11 CONTATO -->
+    <section class="doc-section reveal" id="contato">
+      <div class="section-number">11</div>
+      <h2>Fale com a responsável</h2>
+      <p>Para dúvidas, solicitações ou exercício dos seus direitos relativos a esta Política de Privacidade, entre em contato diretamente:</p>
+      <div class="contact-final">
+        <h3>Keren Layane de Oliveira Silva</h3>
+        <p>Responsável pelo tratamento de dados pessoais<br>Rio Verde — GO, Brasil</p>
+        <div class="contact-links">
+          <a href="mailto:admkerenoliveira@gmail.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            admkerenoliveira@gmail.com
+          </a>
+          <a href="https://wa.me/5564993296241" class="contact-link" target="_blank" rel="noopener">
+            <div class="contact-link-icon">✆</div>
+            (64) 99329-6241
+          </a>
+          <a href="https://kerenoliveira.github.io/Keren./" class="contact-link" target="_blank">
+            <div class="contact-link-icon">◎</div>
+            kerenoliveira.github.io/Keren./
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="doc-footer">
+  <div class="footer-logo">Keren<span>.</span></div>
+  <div class="footer-copy">© 2026 Keren Layane de Oliveira Silva · Todos os direitos reservados</div>
+  <div class="footer-links">
+    <a href="https://kerenoliveira.github.io/Keren./">Site</a>
+    <a href="mailto:admkerenoliveira@gmail.com">Contato</a>
+  </div>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // Scroll progress
+  const bar = document.getElementById('scroll-bar');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    bar.style.width = pct + '%';
+  });
+
+  // Reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
+
+  // Active sidebar link
+  const sections = document.querySelectorAll('.doc-section');
+  const sideLinks = document.querySelectorAll('.sidebar-nav a');
+  const sideObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        sideLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => sideObs.observe(s));
+</script>
+</body>
+</html>
