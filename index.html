@@ -1040,40 +1040,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <div class="contact-right">
-    <div class="contact-form">
-      <div class="form-row">
-        <div class="form-field">
-          <label>Nome</label>
-          <input type="text" placeholder="Seu nome">
-        </div>
-        <div class="form-field">
-          <label>Empresa</label>
-          <input type="text" placeholder="Nome do negócio">
-        </div>
-      </div>
-      <div class="form-field">
-        <label>E-mail</label>
-        <input type="email" placeholder="seu@email.com">
-      </div>
-      <div class="form-field">
-        <label>Tipo de projeto</label>
-        <select>
-          <option value="" disabled selected>Selecione...</option>
-          <option>Site profissional</option>
-          <option>Identidade visual / Branding</option>
-          <option>Estratégia de negócios</option>
-          <option>Outro</option>
-        </select>
-      </div>
-      <div class="form-field">
-        <label>Mensagem</label>
-        <textarea rows="4" placeholder="Conte um pouco sobre o seu projeto..."></textarea>
-      </div>
-      <div class="form-submit">
-        <button class="submit-btn">Enviar mensagem</button>
-        <span class="form-note">Respondo em até 24h</span>
-      </div>
+  <form action="https://formsubmit.co/Keren.estrategia@gmail.com" method="POST" class="contact-form">
+
+  <input type="hidden" name="_subject" value="Novo contato pelo site">
+  <input type="hidden" name="_captcha" value="false">
+
+  <div class="form-row">
+    <div class="form-field">
+      <label>Nome</label>
+      <input type="text" name="nome" required>
     </div>
+
+    <div class="form-field">
+      <label>Empresa</label>
+      <input type="text" name="empresa">
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label>E-mail</label>
+    <input type="email" name="email" required>
+  </div>
+
+  <div class="form-field">
+    <label>Tipo de projeto</label>
+    <select name="projeto">
+      <option value="">Selecione...</option>
+      <option>Site profissional</option>
+      <option>Identidade visual / Branding</option>
+      <option>Estratégia de negócios</option>
+      <option>Outro</option>
+    </select>
+  </div>
+
+  <div class="form-field">
+    <label>Mensagem</label>
+    <textarea name="mensagem" rows="4" required></textarea>
+  </div>
+
+  <div class="form-submit">
+    <button type="submit" class="submit-btn">
+      Enviar mensagem
+    </button>
+  </div>
+
+  </form>
   </div>
 </section>
 
