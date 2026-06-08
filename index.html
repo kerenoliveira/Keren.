@@ -1084,6 +1084,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </button>
   </div>
 
+  <input type="hidden" name="_next" value="https://kerenoliveira.github.io/Keren/obrigado.html">
+  <input type="hidden" name="_captcha" value="false">
   </form>
   </div>
 </section>
@@ -1149,15 +1151,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const scrollY = window.scrollY;
       heroImg.style.transform = `scale(1.05) translateY(${scrollY * 0.15}px)`;
     }
-  });
-
-  // Form submit
-  document.querySelector('.submit-btn').addEventListener('click', function() {
-    const name = document.querySelector('input[placeholder="Seu nome"]').value;
-    if (!name) { alert('Preencha seu nome para continuar!'); return; }
-    const subject = encodeURIComponent('Novo projeto via portfólio - ' + name);
-    const body = encodeURIComponent('Olá Keren, gostaria de falar sobre um projeto!');
-    window.location.href = 'mailto:Keren.estrategia@gmail.com?subject=' + subject + '&body=' + body;
   });
 
   // Smooth active nav
